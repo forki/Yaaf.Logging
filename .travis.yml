@@ -1,0 +1,16 @@
+language: csharp
+
+before_script:
+- chmod +x build.sh
+
+script: 
+  - ./build.sh All
+  
+branches:
+  except:
+    - gh-pages
+
+notifications:
+  email: false
+  irc:
+    - "chat.freenode.net##irc.net"

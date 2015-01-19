@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>@project@</id>
+    <title>@project@</title>
+    <version>@build.number@</version>
+    <authors>@authors@</authors>
+    <owners>@authors@</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/matthid/Yaaf.DependencyInjection/blob/develop/doc/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/matthid/Yaaf.DependencyInjection</projectUrl>
+    <summary>@summary@</summary>
+    <description>@description@</description>
+    <releaseNotes>@releaseNotes@</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>@tags@</tags>
+    @dependencies@
+  </metadata>
+  <files>
+    <file src="release/lib/net45/Yaaf.DependencyInjection.dll" target="lib\net45\Yaaf.DependencyInjection.dll" />
+    <file src="release/lib/net45/Yaaf.DependencyInjection.xml" target="lib\net45\Yaaf.DependencyInjection.xml" />
+    <file src="release/lib/net40/Yaaf.DependencyInjection.dll" target="lib\net40\Yaaf.DependencyInjection.dll" />
+    <file src="release/lib/net40/Yaaf.DependencyInjection.xml" target="lib\net40\Yaaf.DependencyInjection.xml" />
+    <file src="release/lib/portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1/Yaaf.DependencyInjection.dll" 
+          target="lib\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\Yaaf.DependencyInjection.dll" />
+    <file src="release/lib/portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1/Yaaf.DependencyInjection.xml" 
+          target="lib\portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1\Yaaf.DependencyInjection.xml" />
+    <file src="doc/LICENSE.md" target="LICENSE.md" />
+  </files>
+</package>
