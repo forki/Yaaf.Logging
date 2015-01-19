@@ -93,7 +93,7 @@ let buildApp (buildParams:BuildParams) =
     let buildDir = buildDir @@ buildParams.CustomBuildName
     CleanDirs [ buildDir ]
     // build app
-    let files = !! (sprintf "src/source/**/*.%s.csproj" buildParams.CustomBuildName)
+    let files = !! (sprintf "src/source/**/*.%s.fsproj" buildParams.CustomBuildName)
     files
         |> MSBuild buildDir "Build" 
             [   "Configuration", buildMode
@@ -104,7 +104,7 @@ let buildTests (buildParams:BuildParams) =
     let testDir = testDir @@ buildParams.CustomBuildName
     CleanDirs [ testDir ]
     // build tests
-    let files = !! (sprintf "src/test/**/Test.*.%s.csproj" buildParams.CustomBuildName)
+    let files = !! (sprintf "src/test/**/Test.*.%s.fsproj" buildParams.CustomBuildName)
     files
         |> MSBuild testDir "Build" 
             [   "Configuration", buildMode

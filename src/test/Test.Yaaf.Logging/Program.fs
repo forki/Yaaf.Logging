@@ -2,12 +2,6 @@
 // Weitere Hilfe finden Sie im Projekt "F#-Lernprogramm".
 namespace Yaaf.LoggingTest
 
-open NUnit.Framework
-
-[<TestFixture>]
-type ``Empty Test``() = 
-    [<Test>]
-    member this.``just a test to make NUnit happy`` () = ()
 
 module TestCode = 
     open Yaaf.Logging
@@ -36,14 +30,22 @@ module Test2Module =
         Yaaf.LoggingTest.TestCode.testCode()
 
 namespace Yaaf.LoggingTest
+
+open NUnit.Framework
+[<TestFixture>]
+type ``Empty Test``() = 
+    [<Test>]
+    member this.``just a test to make NUnit happy`` () = ()
+
+
 module EntryPoint =
     open Yaaf.Logging
     open System.Diagnostics
       
-    [<EntryPoint>]
+    //[<EntryPoint>]
     let main argv = 
         printfn "%A" argv
-#if FULL_NET
+#if NO_PCL
         // First everything goes to Yaaf.Logging
         Log.UnhandledSource.Wrapped.Listeners.Add (Log.ConsoleLogger SourceLevels.Verbose) |> ignore
         Yaaf.LoggingTest.TestCode.testCode()

@@ -6,7 +6,7 @@
   </PropertyGroup>
   <Import Project="$(SolutionDir)\buildConfig.targets" />
   <ItemGroup>
-    <CompileImports Include="..\..\SolutionInfo.fs">
+    <CompileImports Include="..\..\SharedAssemblyInfo.fs">
       <Link>SolutionInfo.fs</Link>
     </CompileImports>
     <CompileImports Include="VersionAssemblyInfo.fs" />

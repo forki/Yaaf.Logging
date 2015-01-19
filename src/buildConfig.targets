@@ -10,12 +10,12 @@
   <Choose>
     <When Condition="$(CustomBuildName) == 'portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1'">
       <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <DefineConstants Condition=" '$(OS)' != 'Unix' ">DEBUG;TRACE;PCL;PCL_111</DefineConstants>
-        <DefineConstants Condition=" '$(OS)' == 'Unix' ">DEBUG;TRACE;PCL;PCL_111;MONO</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' != 'Unix' ">DEBUG;TRACE;NET45;PCL;PCL_111</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' == 'Unix' ">DEBUG;TRACE;NET45;PCL;PCL_111;MONO</DefineConstants>
       </PropertyGroup>
       <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <DefineConstants Condition=" '$(OS)' != 'Unix' ">TRACE;PCL;PCL_111</DefineConstants>
-        <DefineConstants Condition=" '$(OS)' == 'Unix' ">TRACE;PCL;PCL_111;MONO</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' != 'Unix' ">TRACE;NET45;PCL;PCL_111</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' == 'Unix' ">TRACE;NET45;PCL;PCL_111;MONO</DefineConstants>
       </PropertyGroup>
       <PropertyGroup>
         <FSHARP_CORE_INCLUDE>FSharp.Core</FSHARP_CORE_INCLUDE>
@@ -24,12 +24,12 @@
     </When>
     <When Condition="$(CustomBuildName) == 'net40'">
       <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <DefineConstants Condition=" '$(OS)' != 'Unix' ">DEBUG;TRACE;NET40</DefineConstants>
-        <DefineConstants Condition=" '$(OS)' == 'Unix' ">DEBUG;TRACE;NET40;MONO</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' != 'Unix' ">DEBUG;TRACE;NO_PCL;NET40</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' == 'Unix' ">DEBUG;TRACE;NO_PCL;NET40;MONO</DefineConstants>
       </PropertyGroup>
       <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <DefineConstants Condition=" '$(OS)' != 'Unix' ">TRACE;NET40</DefineConstants>
-        <DefineConstants Condition=" '$(OS)' == 'Unix' ">TRACE;NET40;MONO</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' != 'Unix' ">TRACE;NO_PCL;NET40</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' == 'Unix' ">TRACE;NO_PCL;NET40;MONO</DefineConstants>
       </PropertyGroup>
       <PropertyGroup>
         <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -37,12 +37,12 @@
     </When>
     <When Condition="$(CustomBuildName) == 'net45'">
       <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <DefineConstants Condition=" '$(OS)' != 'Unix' ">DEBUG;TRACE;NET45</DefineConstants>
-        <DefineConstants Condition=" '$(OS)' == 'Unix' ">DEBUG;TRACE;NET45;MONO</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' != 'Unix' ">DEBUG;TRACE;NO_PCL;NET45</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' == 'Unix' ">DEBUG;TRACE;NO_PCL;NET45;MONO</DefineConstants>
       </PropertyGroup>
       <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <DefineConstants Condition=" '$(OS)' != 'Unix' ">TRACE;NET45</DefineConstants>
-        <DefineConstants Condition=" '$(OS)' == 'Unix' ">TRACE;NET45;MONO</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' != 'Unix' ">TRACE;NO_PCL;NET45</DefineConstants>
+        <DefineConstants Condition=" '$(OS)' == 'Unix' ">TRACE;NO_PCL;NET45;MONO</DefineConstants>
       </PropertyGroup>
     </When>
     <Otherwise>

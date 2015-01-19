@@ -7,7 +7,7 @@ module Yaaf.Logging.AsyncTracing
 
 open System.Diagnostics
 open Yaaf.Logging
-#if FULL_NET
+#if NO_PCL
 type CallContext = System.Runtime.Remoting.Messaging.CallContext
 type BindingFlags = System.Reflection.BindingFlags
 #endif

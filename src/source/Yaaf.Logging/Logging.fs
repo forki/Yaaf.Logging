@@ -9,7 +9,7 @@ open System.Diagnostics
 open System.IO
 
 
-#if FULL_NET
+#if NO_PCL
 type IDuplicateListener = 
     abstract member Duplicate : string -> TraceListener
 
@@ -186,7 +186,7 @@ type ITraceSource =
     abstract member SwitchLevel : SourceLevels with get,set
 
     abstract member ClearListeners : unit -> unit
-#if FULL_NET
+#if NO_PCL
     abstract member Wrapped : TraceSource
 #endif
 
@@ -205,7 +205,7 @@ module internal Helper =
     let shouldLog (sourceLevels:SourceLevels) (tet:TraceEventType) = 
         (enum (int sourceLevels) &&& tet) <> enum 0
 
-#if FULL_NET
+#if NO_PCL
     let toTraceEventType (te:TraceEventType) = 
         enum (int te) : System.Diagnostics.TraceEventType
     let toSourceLevels (sl:SourceLevels) = 
@@ -380,7 +380,7 @@ module Log =
         let emptySource = Source "Empty"
         emptySource.ClearListeners()
         DefaultTracer emptySource "Empty"
-#if FULL_NET
+#if NO_PCL
     /// Returns a Console-Logger for debugging purposes
     let ConsoleLogger level =
         new ConsoleTraceListener(

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <RootNamespace>Yaaf.Logging</RootNamespace>
-    <AssemblyName>Yaaf.Logging</AssemblyName>
+    <RootNamespace>Test.Yaaf.Logging</RootNamespace>
+    <AssemblyName>Test.Yaaf.Logging</AssemblyName>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\buildConfig.targets" />
   <ItemGroup>
@@ -16,10 +16,18 @@
     <ReferenceImports Include="$(FSHARP_CORE_INCLUDE)">
       <HintPath>$(FSHARP_CORE_HINTPATH)</HintPath>
     </ReferenceImports>
+    <ReferenceImports Include="nunit.framework">
+      <HintPath>..\..\..\.nuget\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </ReferenceImports>
+    <ReferenceImports Include="Unquote">
+      <HintPath>..\..\..\.nuget\packages\Unquote.2.2.2\lib\net40\Unquote.dll</HintPath>
+      <Private>True</Private>
+    </ReferenceImports>
   </ItemGroup>
   <ItemGroup>
     <ProjectReferenceImports Include="$(SolutionDir)\source\Yaaf.Logging\Yaaf.Logging.$(CustomBuildName).fsproj">
-      <Name>Yaaf.Logging</Name>
+      <Name>Yaaf.Logging.$(CustomBuildName)</Name>
       <Project>{fa96ef91-c732-48cd-94ef-8308e7ef36c2}</Project>
       <Private>True</Private>
     </ProjectReferenceImports>

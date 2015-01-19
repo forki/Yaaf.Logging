@@ -4,7 +4,7 @@
 // ----------------------------------------------------------------------------
 namespace Yaaf.Logging
 
-#if FULL_NET
+#if NO_PCL
 open System
 open System.Diagnostics
 open System.IO
