@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Log - Yaaf.Logging</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Matthias Dittrich">
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="https://matthid.github.io/Yaaf.Logging/content/style.css" />
+    <link type="text/css" rel="stylesheet" href="https://matthid.github.io/Yaaf.Logging/content/prism.css" />
+    <script type="text/javascript" src="https://matthid.github.io/Yaaf.Logging/content/tips.js"></script>
+	<script type="text/javascript" src="https://matthid.github.io/Yaaf.Logging/content/prism.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="http://tpetricek.github.io/FSharp.Formatting/"><img height="16" width="16" src="http://fsharp.org/images/thumbs/FSharp.Formatting.png" /> F# Formatting</a></li>
+        </ul>
+        <h3 class="muted"><a href="https://matthid.github.io/Yaaf.Logging/index.html">Yaaf.Logging</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+
+
+
+<h1>Log</h1>
+<div class="xmldoc">
+    Defined in Yaaf.Logging.dll.
+</div>
+<div class="xmldoc">
+</div>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Function or value</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '5', 5)" onmouseover="showTip(event, '5', 5)">
+            AsyncStack ()
+          </code>
+          <div class="tip" id="5">
+            <strong>Signature:</strong> unit -&gt; IStackFrame list<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L222-222" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Gets the current Async Stacktrace. Head is the latest added item. (fifo)
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '6', 6)" onmouseover="showTip(event, '6', 6)">
+            AsyncStackString ()
+          </code>
+          <div class="tip" id="6">
+            <strong>Signature:</strong> unit -&gt; string<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L226-226" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Get the current AsyncStack() and formats it as an stacktrace string
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '7', 7)" onmouseover="showTip(event, '7', 7)">
+            Crit fmt
+          </code>
+          <div class="tip" id="7">
+            <strong>Signature:</strong> fmt:(unit -&gt; string) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L276-276" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '8', 8)" onmouseover="showTip(event, '8', 8)">
+            EndActivity act
+          </code>
+          <div class="tip" id="8">
+            <strong>Signature:</strong> act:ITracer -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L244-244" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Ends the given activity.
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
+            Err fmt
+          </code>
+          <div class="tip" id="9">
+            <strong>Signature:</strong> fmt:(unit -&gt; string) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L277-277" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
+            Info fmt
+          </code>
+          <div class="tip" id="10">
+            <strong>Signature:</strong> fmt:(unit -&gt; string) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L278-278" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
+            SetUnhandledSource source
+          </code>
+          <div class="tip" id="11">
+            <strong>Signature:</strong> source:ITraceSource -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L196-196" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Sets the traceSource for all unhandled namespaces.
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+            SetupNamespace f ns
+          </code>
+          <div class="tip" id="12">
+            <strong>Signature:</strong> f:(ITraceSource -&gt; &#39;?6352) -&gt; ns:string -&gt; &#39;?6352<br />
+                          <strong>Type parameters:</strong> '?6352          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L215-215" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Helper API to init a tracesource for a given namespace. 
+ If no Tracesource was added to TraceSourceDict for the given namespace a new TraceSource will be added,
+ If for the given namespace was already a TraceSource added nothing will be done but f will be called on the current instance.
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
+            StartActivity act
+          </code>
+          <div class="tip" id="13">
+            <strong>Signature:</strong> act:string -&gt; ITracer<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L232-232" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Starts an activity with the given name.
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+            StartActivitySource source act
+          </code>
+          <div class="tip" id="14">
+            <strong>Signature:</strong> source:ITraceSource -&gt; act:string -&gt; ITracer<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L239-239" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Starts an activity with overwriting the namespace tracesources. 
+ Within the activity (and all child activites for that matter) this tracesource will be used.
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
+            TraceMe a
+          </code>
+          <div class="tip" id="15">
+            <strong>Signature:</strong> a:&#39;?6359 -&gt; &#39;?6359<br />
+                          <strong>Type parameters:</strong> '?6359          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L253-253" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Traces the given async
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
+            TraceMeAs act a
+          </code>
+          <div class="tip" id="16">
+            <strong>Signature:</strong> act:&#39;?6361 -&gt; a:&#39;?6362 -&gt; &#39;?6362<br />
+                          <strong>Type parameters:</strong> '?6361, '?6362          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L263-263" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Trace the given async as Activity
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
+            TraceMeSource source act a
+          </code>
+          <div class="tip" id="17">
+            <strong>Signature:</strong> source:&#39;?6364 -&gt; act:&#39;?6365 -&gt; a:&#39;?6366 -&gt; &#39;?6366<br />
+                          <strong>Type parameters:</strong> '?6364, '?6365, '?6366          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L274-274" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Trace the given async as Activity with the given TraceSource
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
+            TraceSourceDict 
+          </code>
+          <div class="tip" id="18">
+            <strong>Signature:</strong> ConcurrentDictionary&lt;string,ITraceSource&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L206-206" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Gets the dictionary to configure the namespaces that should be logged.
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
+            UnhandledSource 
+          </code>
+          <div class="tip" id="19">
+            <strong>Signature:</strong> ITraceSource<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L201-201" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+ Gets the traceSource for all unhandled namespaces.
+ </br>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
+            Verb fmt
+          </code>
+          <div class="tip" id="20">
+            <strong>Signature:</strong> fmt:(unit -&gt; string) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L279-279" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+            Warn fmt
+          </code>
+          <div class="tip" id="21">
+            <strong>Signature:</strong> fmt:(unit -&gt; string) -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/matthid/Yaaf.Logging/blob/master/src/source/Yaaf.Logging/AsyncTracing.fs#L280-280" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+        <div class="span3">
+          <a href="https://matthid.github.io/Yaaf.Logging/index.html">
+            <img src="https://matthid.github.io/Yaaf.Logging/content/img/logo.png" style="width:140px;height:140px;margin:10px 0px 0px 35px;border-style:none;" />
+          </a>
+
+          <ul class="nav nav-list" id="menu">
+
+            <li class="nav-header">Yaaf.Logging</li>
+
+            <li class="divider"></li>
+            <li><a href="https://www.nuget.org/packages/Yaaf.Logging/">Get Yaaf.Logging package via NuGet</a></li>
+            <li><a href="https://github.com/matthid/Yaaf.Logging">Source Code</a></li>
+            <li><a href="https://github.com/matthid/Yaaf.Logging/issues">Open bugs and feature requests</a></li>
+            <li><a href="https://github.com/matthid/Yaaf.Logging/issues/new">Report Issue or Request Feature</a></li>
+            <li><a href="https://github.com/matthid/Yaaf.Logging/blob/devel/LICENSE.md">License (MIT)</a></li>
+            <li><a href="https://matthid.github.io/Yaaf.Logging/Contributing.html">Contributing</a></li>
+            
+            <li class="nav-header">Documentation</li>
+              
+            <li><a href="https://matthid.github.io/Yaaf.Logging/index.html">Quick Intro</a></li>
+            <li><a href="https://matthid.github.io/Yaaf.Logging/ReleaseNotes.html">Release Notes</a></li>
+            <li><a href="https://matthid.github.io/Yaaf.Logging/DevelopReadme.html">Development Intro</a></li>
+
+            <li class="nav-header">Reference</li>
+              
+            <li><a href="https://matthid.github.io/Yaaf.Logging/references/index.html">API Reference</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+      <a href="https://github.com/matthid/Yaaf.Logging"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    </body>
+  </html>
