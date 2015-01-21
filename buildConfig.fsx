@@ -28,8 +28,8 @@ open AssemblyInfoFile
 // properties (main)
 let projectName = "Yaaf.Logging"
 let copyrightNotice = "Yaaf.Logging Copyright © Matthias Dittrich 2011-2015"
-let projectSummary = "Yaaf.Logging is a simple abstraction layer over a (simple) dependency injection library."
-let projectDescription = "Yaaf.Logging is a simple abstraction layer over a (simple) dependency injection library."
+let projectSummary = "Yaaf.Logging is a simple abstraction layer over a logging library (designed for System.Diagnostic.TraceSource)."
+let projectDescription = "Yaaf.Logging is a simple abstraction layer over a logging library (designed for System.Diagnostic.TraceSource)."
 let authors = ["Matthias Dittrich"]
 let page_author = "Matthias Dittrich"
 let mail = "matthi.d@gmail.com"
