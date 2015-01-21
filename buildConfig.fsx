@@ -33,8 +33,8 @@ let projectDescription = "Yaaf.Logging is a simple abstraction layer over a (sim
 let authors = ["Matthias Dittrich"]
 let page_author = "Matthias Dittrich"
 let mail = "matthi.d@gmail.com"
-let version = "1.0.0.0"
-let version_nuget = "1.0.0"
+let version = "1.0.1.0"
+let version_nuget = "1.0.1"
 let commitHash = Information.getCurrentSHA1(".")
 
 //let buildTargets = environVarOrDefault "BUILDTARGETS" ""

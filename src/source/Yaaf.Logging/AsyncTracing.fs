@@ -278,25 +278,30 @@ module Log =
     let Info fmt = (getTracerFrom (Helper.currentBackend.CreateStackFrame(1, true))).logInfo fmt
     let Verb fmt = (getTracerFrom (Helper.currentBackend.CreateStackFrame(1, true))).logVerb fmt
     let Warn fmt = (getTracerFrom (Helper.currentBackend.CreateStackFrame(1, true))).logWarn fmt
-    
+
+/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.  
 [<System.Diagnostics.DebuggerStepThroughAttribute>]
 [<System.Diagnostics.DebuggerNonUserCodeAttribute>]
 [<System.Diagnostics.DebuggerHiddenAttribute>]
 let raise (exn:exn) = 
-    exn.Data.Add("tracked", true)
-    let asyncStack = getAsyncStackString()
-    exn.Data.Add("asynctrace", asyncStack)
+    if not (exn.Data.Contains ("tracked")) then
+        exn.Data.Add("tracked", true)
+        let asyncStack = getAsyncStackString()
+        exn.Data.Add("asynctrace", asyncStack)
 
-    Log.Warn(fun () -> L "Raising Exception (%s) in Async Code" (exn.Message))
-    Log.Verb(fun () -> L "AsyncStacktrace: %s" asyncStack)
-    let stacktrace =
-        try
-            failwith "test"
-        with exn ->
-            exn.StackTrace
-    Log.Verb(fun () -> L "Stacktrace: %s" (stacktrace))
+        Log.Warn(fun () -> L "Raising Exception in Async Code: %A" exn)
+        Log.Verb(fun () -> L "AsyncStacktrace: %s" asyncStack)
+        let stacktrace =
+            try
+                failwith "test"
+            with exn ->
+                exn.StackTrace
+        Log.Verb(fun () -> L "Stacktrace: %s" (stacktrace))
+    else
+        Log.Warn(fun () -> L "Re-Raising Exception in Async Code (see previous message for stacktrace): %A" exn)
     Microsoft.FSharp.Core.Operators.raise exn
 
+/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.  
 [<System.Diagnostics.DebuggerStepThroughAttribute>]
 [<System.Diagnostics.DebuggerNonUserCodeAttribute>]
 [<System.Diagnostics.DebuggerHiddenAttribute>]
@@ -304,6 +309,7 @@ let failwith msg =
     let exn = new exn(msg)
     raise exn
      
+/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.  
 [<System.Diagnostics.DebuggerStepThroughAttribute>]
 [<System.Diagnostics.DebuggerNonUserCodeAttribute>]
 [<System.Diagnostics.DebuggerHiddenAttribute>]
