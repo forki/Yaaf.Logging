@@ -35,8 +35,8 @@ let buildConfig =
  { BuildConfiguration.Defaults with
     ProjectName = "Yaaf.Logging"
     CopyrightNotice = "Yaaf.Logging Copyright © Matthias Dittrich 2011-2015"
-    ProjectSummary = "Yaaf.Logging is a simple abstraction layer over a (simple) dependency injection library."
-    ProjectDescription = "Yaaf.Logging is a simple abstraction layer over a (simple) dependency injection library."
+    ProjectSummary = "Yaaf.Logging is a simple abstraction layer over a logging library (designed for System.Diagnostic.TraceSource)."
+    ProjectDescription = "Yaaf.Logging is a simple abstraction layer over a logging library (designed for System.Diagnostic.TraceSource)."
     ProjectAuthors = ["Matthias Dittrich"]
     NugetTags =  "logging tracesource C# F# dotnet .net"
     PageAuthor = "Matthias Dittrich"

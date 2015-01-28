@@ -186,8 +186,18 @@ type ITraceSource =
     abstract member SwitchLevel : SourceLevels with get,set
 
     abstract member ClearListeners : unit -> unit
+
 #if NO_PCL
+type IExtendedTraceSource =
+    inherit ITraceSource
     abstract member Wrapped : TraceSource
+[<AutoOpen>]
+module TraceSourceExtensions = 
+    type ITraceSource with
+        member x.Wrapped =
+            match x with
+            | :? IExtendedTraceSource as ext -> ext.Wrapped
+            | _ -> failwith "no wrapped TraceSource found (possibly a native ITraceSource implementation!)"
 #endif
 
 
@@ -205,6 +215,19 @@ module internal Helper =
     let shouldLog (sourceLevels:SourceLevels) (tet:TraceEventType) = 
         (enum (int sourceLevels) &&& tet) <> enum 0
 
+    let emptySource = 
+        { new ITraceSource with
+            member x.TraceEvent(eventType:TraceEventType, id:int, format:string, [<ParamArray>] args:Object[]) = ()
+            member x.TraceEvent (eventType:TraceEventType, id:int, message:string) = ()
+            member x.TraceTransfer(id:int, message:string, relatedActivityId:Guid) = ()
+            member x.Flush () = ()
+            member x.SwitchLevel 
+                with get() =
+                    SourceLevels.Off
+                and set v = ()
+            member x.ClearListeners () = ()
+        }
+
 #if NO_PCL
     let toTraceEventType (te:TraceEventType) = 
         enum (int te) : System.Diagnostics.TraceEventType
@@ -215,7 +238,7 @@ module internal Helper =
 
 
     let fromTraceSource (ts: TraceSource) = 
-        { new ITraceSource with
+        { new IExtendedTraceSource with
             member x.TraceEvent (eventType:TraceEventType, id:int, format:string, [<ParamArray>] args:Object[])=
                 ts.TraceEvent(eventType |> toTraceEventType, id, format, args)
             member x.TraceEvent (eventType:TraceEventType, id:int, message:string) =
@@ -228,7 +251,7 @@ module internal Helper =
                 and set v = ts.Switch.Level <- v |> toSourceLevels
             member x.ClearListeners () = ts.Listeners.Clear()
             member x.Wrapped = ts
-        }
+        } :> ITraceSource
         
     let fromStackFrame (sf: StackFrame) = 
         { new IStackFrame with
@@ -376,10 +399,13 @@ module Log =
     let DefaultTracer traceSource id = 
         createDefaultStateTracer traceSource id
         
+    /// A default empty tracer.
     let EmptyTracer = 
-        let emptySource = Source "Empty"
-        emptySource.ClearListeners()
-        DefaultTracer emptySource "Empty"
+        { new ITracer with
+            member x.Dispose() = ()
+            member x.TraceSource = Helper.emptySource
+            member x.ActivityId = Guid.Empty }
+
 #if NO_PCL
     /// Returns a Console-Logger for debugging purposes
     let ConsoleLogger level =
