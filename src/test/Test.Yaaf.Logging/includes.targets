@@ -17,11 +17,11 @@
       <HintPath>$(FSHARP_CORE_HINTPATH)</HintPath>
     </ReferenceImports>
     <ReferenceImports Include="nunit.framework">
-      <HintPath>..\..\..\.nuget\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\packages\.nuget\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </ReferenceImports>
     <ReferenceImports Include="Unquote">
-      <HintPath>..\..\..\.nuget\packages\Unquote.2.2.2\lib\net40\Unquote.dll</HintPath>
+      <HintPath>..\..\..\packages\.nuget\Unquote.2.2.2\lib\net40\Unquote.dll</HintPath>
       <Private>True</Private>
     </ReferenceImports>
   </ItemGroup>
