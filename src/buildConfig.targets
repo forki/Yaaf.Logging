@@ -19,7 +19,7 @@
       </PropertyGroup>
       <PropertyGroup>
         <FSHARP_CORE_INCLUDE>FSharp.Core</FSHARP_CORE_INCLUDE>
-        <FSHARP_CORE_HINTPATH>..\..\..\.nuget\packages\FSharp.Core.Mono.Signed.3.1.1.27\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\FSharp.Core.dll</FSHARP_CORE_HINTPATH>
+        <FSHARP_CORE_HINTPATH>..\..\..\packages\.nuget\FSharp.Core.Mono.Signed.3.1.1.27\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\FSharp.Core.dll</FSHARP_CORE_HINTPATH>
       </PropertyGroup>
     </When>
     <When Condition="$(CustomBuildName) == 'net40'">

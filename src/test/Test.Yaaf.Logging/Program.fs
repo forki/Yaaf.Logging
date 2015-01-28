@@ -30,12 +30,77 @@ module Test2Module =
         Yaaf.LoggingTest.TestCode.testCode()
 
 namespace Yaaf.LoggingTest
-
+open System
+open System.Diagnostics
+open System.IO
 open NUnit.Framework
+open Yaaf.Logging
+open Yaaf.Logging.AsyncTracing
+open Swensen.Unquote
 [<TestFixture>]
 type ``Empty Test``() = 
+    [<SetUp>]
+    member x.Setup() =
+#if PCL
+        let toTraceEventType (te:TraceEventType) = 
+            enum (int te) : System.Diagnostics.TraceEventType
+        let toSourceLevels (sl:SourceLevels) = 
+            enum (int sl) : System.Diagnostics.SourceLevels
+        let fromSourceLevels (sl:System.Diagnostics.SourceLevels) = 
+            enum (int sl) : SourceLevels
+
+
+        let fromTraceSource (ts: TraceSource) = 
+            { new ITraceSource with
+                member x.TraceEvent (eventType:TraceEventType, id:int, format:string, [<ParamArray>] args:Object[])=
+                    ts.TraceEvent(eventType |> toTraceEventType, id, format, args)
+                member x.TraceEvent (eventType:TraceEventType, id:int, message:string) =
+                    ts.TraceEvent(eventType |> toTraceEventType, id, message)
+                member x.TraceTransfer (id:int, message:string, relatedActivityId:Guid) =
+                    ts.TraceTransfer (id, message, relatedActivityId)
+                member x.Flush () = ts.Flush()
+                member x.SwitchLevel 
+                    with get () = ts.Switch.Level |> fromSourceLevels
+                    and set v = ts.Switch.Level <- v |> toSourceLevels
+                member x.ClearListeners () = ts.Listeners.Clear()
+            }
+        
+        let fromStackFrame (sf: StackFrame) = 
+            { new IStackFrame with
+                member x.GetMethod () = sf.GetMethod()
+                member x.GetFileName () = sf.GetFileName()
+                member x.GetFileLineNumber () = sf.GetFileLineNumber()
+            }
+        let backend = 
+            { new ILoggingBackend with
+                member x.CurrentActivityId 
+                    with get () = Trace.CorrelationManager.ActivityId 
+                    and set id = Trace.CorrelationManager.ActivityId <- id
+                member x.GetLogicalData(name) =
+                    System.Runtime.Remoting.Messaging.CallContext.LogicalGetData(name)
+                member x.SetLogicalData(name, o) =
+                    System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(name, o)
+                member x.CreateTraceSource (name, instance) = 
+                    TraceSource(name)
+                    //match instance with
+                    //| Some ins -> MyTraceSource(name, ins) :> TraceSource
+                    //| None -> TraceSource(name)
+                    |> fromTraceSource
+                member x.CreateStackFrame (walk:int, t:bool) =
+                    new StackFrame(walk + 1, t)
+                    |> fromStackFrame
+            }
+        Log.SetBackend backend
+#else
+        ()
+#endif
+
     [<Test>]
-    member this.``just a test to make NUnit happy`` () = ()
+    member this.``check that we can throw the same exception twice`` () = 
+        let exn = new System.InvalidOperationException()
+        raises<System.InvalidOperationException> <@ raise (exn) @>
+        raises<System.InvalidOperationException> <@ raise (exn) @>
+        ()
 
 
 module EntryPoint =

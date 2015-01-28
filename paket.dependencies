@@ -1,0 +1,5 @@
+source https://nuget.org/api/v2
+
+nuget NuGet.CommandLine
+nuget NUnit.Runners
+nuget Yaaf.AdvancedBuilding
