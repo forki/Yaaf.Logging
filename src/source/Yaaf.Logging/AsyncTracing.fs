@@ -16,6 +16,7 @@ module internal Helpers =
     let inline reraisePreserveStackTrace (e:System.Exception) =
 #if NET45
         System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(e).Throw()
+        raise e
 #else
         let remoteStackTraceString = typeof<exn>.GetField("_remoteStackTraceString", BindingFlags.Instance ||| BindingFlags.NonPublic);
         remoteStackTraceString.SetValue(e, e.StackTrace + System.Environment.NewLine);
