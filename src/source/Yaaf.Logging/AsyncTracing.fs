@@ -7,20 +7,21 @@ module Yaaf.Logging.AsyncTracing
 
 open System.Diagnostics
 open Yaaf.Logging
-#if NO_PCL
-type CallContext = System.Runtime.Remoting.Messaging.CallContext
-type BindingFlags = System.Reflection.BindingFlags
-#endif
-let inline reraisePreserveStackTrace (e:System.Exception) =
-#if NET45
-    System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(e).Throw()
-#else
-    let remoteStackTraceString = typeof<exn>.GetField("_remoteStackTraceString", BindingFlags.Instance ||| BindingFlags.NonPublic);
-    remoteStackTraceString.SetValue(e, e.StackTrace + System.Environment.NewLine);
-    raise e
-#endif
 
 module internal Helpers =
+#if NO_PCL
+    type CallContext = System.Runtime.Remoting.Messaging.CallContext
+    type BindingFlags = System.Reflection.BindingFlags
+#endif
+    let inline reraisePreserveStackTrace (e:System.Exception) =
+#if NET45
+        System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(e).Throw()
+#else
+        let remoteStackTraceString = typeof<exn>.GetField("_remoteStackTraceString", BindingFlags.Instance ||| BindingFlags.NonPublic);
+        remoteStackTraceString.SetValue(e, e.StackTrace + System.Environment.NewLine);
+        raise e
+#endif
+
     let namespaceTracer = new System.Collections.Concurrent.ConcurrentDictionary<string, ITraceSource>()
     let namespaceWarnings = new System.Collections.Concurrent.ConcurrentDictionary<string, unit>()
     let mutable globalUnhandledSource = Log.Source "Yaaf.Logging"
