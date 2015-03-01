@@ -1,5 +1,13 @@
 source https://nuget.org/api/v2
 
+// Build
+nuget Yaaf.AdvancedBuilding
 nuget NuGet.CommandLine
 nuget NUnit.Runners
-nuget Yaaf.AdvancedBuilding
+// Until windows version is not broken anymore
+nuget FSharp.Formatting == 2.6.3
+
+// Projects
+nuget NUnit
+nuget Unquote
+nuget FSharp.Core

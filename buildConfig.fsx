@@ -12,6 +12,12 @@
     The secound step is executing this file which resolves all dependencies, builds the solution and executes all unit tests
 *)
 
+#if FAKE
+#else
+// Support when file is opened in Visual Studio
+#load "packages/Yaaf.AdvancedBuilding/content/buildConfigDef.fsx"
+#endif
+
 open BuildConfigDef
 open System.Collections.Generic
 open System.IO
@@ -23,12 +29,7 @@ open AssemblyInfoFile
 
 if isMono then
     monoArguments <- "--runtime=v4.0 --debug"
-let findProjects (buildParams:BuildParams) =
-    !! (sprintf "src/source/**/*.%s.fsproj" buildParams.CustomBuildName)
-    :> _ seq
-let findTestProjects (buildParams:BuildParams) =
-    !! (sprintf "src/test/**/*.%s.fsproj" buildParams.CustomBuildName)
-    :> _ seq
+
 let buildConfig =
  // Read release notes document
  let release = ReleaseNotesHelper.parseReleaseNotes (File.ReadLines "doc/ReleaseNotes.md")
@@ -60,26 +61,20 @@ let buildConfig =
       CreateFSharpAssemblyInfo "./src/SharedAssemblyInfo.fs" info)
     EnableProjectFileCreation = false
     BuildTargets =
-     [ { BuildParams.Empty with
+     [ { BuildParams.WithSolution with
           // The default build
-          CustomBuildName = "net40"
-          SimpleBuildName = "net40"
-          FindProjectFiles = findProjects
-          FindTestFiles = findTestProjects }
-       { BuildParams.Empty with
+          PlatformName = "Net40"
+          AfterBuild = fun _ -> File.Delete "build/net40/FSharp.Core.dll"
+          SimpleBuildName = "net40" }
+       { BuildParams.WithSolution with
           // The generated templates
-          CustomBuildName = "portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1"
-          SimpleBuildName = "profile111"
-          FindProjectFiles = findProjects
-          FindTestFiles = findTestProjects
-          FindUnitTestDlls =
-            // Don't run on mono.
-            if isMono then (fun _ -> Seq.empty) else BuildParams.Empty.FindUnitTestDlls }
-       { BuildParams.Empty with
+          PlatformName = "Profile111"
+          AfterBuild = fun _ -> File.Delete "build/profile111/FSharp.Core.dll"
+          SimpleBuildName = "profile111" }
+       { BuildParams.WithSolution with
           // The generated templates
-          CustomBuildName = "net45"
-          SimpleBuildName = "net45"
-          FindProjectFiles = findProjects
-          FindTestFiles = findTestProjects } ]
+          PlatformName = "Net45"
+          AfterBuild = fun _ -> File.Delete "build/net45/FSharp.Core.dll"
+          SimpleBuildName = "net45" } ]
   }
 

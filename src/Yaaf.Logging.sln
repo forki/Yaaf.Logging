@@ -5,16 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project_root", "project_root", "{4C04B011-7998-4549-A3B5-E57AAF5A2966}"
 	ProjectSection(SolutionItems) = preProject
-		..\.gitignore = ..\.gitignore
-		..\.travis.yml = ..\.travis.yml
-		..\appveyor.yml = ..\appveyor.yml
-		..\AUTHORS.md = ..\AUTHORS.md
-		..\build.cmd = ..\build.cmd
-		..\build.fsx = ..\build.fsx
-		..\build.sh = ..\build.sh
 		..\buildConfig.fsx = ..\buildConfig.fsx
-		..\downloadNuget.fsx = ..\downloadNuget.fsx
-		..\generateDocs.fsx = ..\generateDocs.fsx
 		..\LICENSE.md = ..\LICENSE.md
 		..\packages.config = ..\packages.config
 		..\README.md = ..\README.md
@@ -64,30 +55,49 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{74E37E7B-B46
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{9A47C8E6-9866-4184-B68F-112E3D3AC1D6}"
 	ProjectSection(SolutionItems) = preProject
-		..\nuget\IrcDotNet.nuspec = ..\nuget\IrcDotNet.nuspec
-		..\nuget\IrcDotNet.Sample.nuspec = ..\nuget\IrcDotNet.Sample.nuspec
+		..\nuget\Yaaf.Logging.nuspec = ..\nuget\Yaaf.Logging.nuspec
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{06C1F8D3-2F2C-4B6F-B15B-D99D7D4F35E1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AB22A4FC-7E3F-447F-8DD6-EEB8E4D1336D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Yaaf.Logging.portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1", "source\Yaaf.Logging\Yaaf.Logging.portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1.fsproj", "{FA96EF91-C732-48CD-94EF-8308E7EF36C2}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test.Yaaf.Logging", "test\Test.Yaaf.Logging\Test.Yaaf.Logging.fsproj", "{7F071170-11A8-4CB5-9F08-7D2951018E3F}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test.Yaaf.Logging.portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1", "test\Test.Yaaf.Logging\Test.Yaaf.Logging.portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1.fsproj", "{7F071170-11A8-4CB5-9F08-7D2951018E3F}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Yaaf.Logging", "source\Yaaf.Logging\Yaaf.Logging.fsproj", "{FA96EF91-C732-48CD-94EF-8308E7EF36C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|Net40 = Debug|Net40
+		Debug|Net45 = Debug|Net45
+		Debug|Profile111 = Debug|Profile111
+		Release|Net40 = Release|Net40
+		Release|Net45 = Release|Net45
+		Release|Profile111 = Release|Profile111
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Net40.ActiveCfg = Debug|Net40
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Net40.Build.0 = Debug|Net40
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Net45.ActiveCfg = Debug|Net45
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Net45.Build.0 = Debug|Net45
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Profile111.ActiveCfg = Debug|Profile111
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Debug|Profile111.Build.0 = Debug|Profile111
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Net40.ActiveCfg = Release|Net40
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Net40.Build.0 = Release|Net40
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Net45.ActiveCfg = Release|Net45
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Net45.Build.0 = Release|Net45
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Profile111.ActiveCfg = Release|Profile111
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F}.Release|Profile111.Build.0 = Release|Profile111
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Net40.ActiveCfg = Debug|Net40
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Net40.Build.0 = Debug|Net40
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Net45.ActiveCfg = Debug|Net45
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Net45.Build.0 = Debug|Net45
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Profile111.ActiveCfg = Debug|Profile111
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Debug|Profile111.Build.0 = Debug|Profile111
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Net40.ActiveCfg = Release|Net40
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Net40.Build.0 = Release|Net40
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Net45.ActiveCfg = Release|Net45
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Net45.Build.0 = Release|Net45
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Profile111.ActiveCfg = Release|Profile111
+		{FA96EF91-C732-48CD-94EF-8308E7EF36C2}.Release|Profile111.Build.0 = Release|Profile111
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +109,7 @@ Global
 		{36F2CC74-84CC-4CCD-B2E4-D510E71057FB} = {240ED267-B8AE-4A38-8FB7-A9376FA28A17}
 		{74E37E7B-B460-4C6E-AF28-76F81ED333DA} = {36F2CC74-84CC-4CCD-B2E4-D510E71057FB}
 		{9A47C8E6-9866-4184-B68F-112E3D3AC1D6} = {4C04B011-7998-4549-A3B5-E57AAF5A2966}
+		{7F071170-11A8-4CB5-9F08-7D2951018E3F} = {AB22A4FC-7E3F-447F-8DD6-EEB8E4D1336D}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = IrcDotNet.vsmdi
