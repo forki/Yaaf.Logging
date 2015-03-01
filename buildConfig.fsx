@@ -70,7 +70,10 @@ let buildConfig =
           // The generated templates
           PlatformName = "Profile111"
           AfterBuild = fun _ -> File.Delete "build/profile111/FSharp.Core.dll"
-          SimpleBuildName = "profile111" }
+          SimpleBuildName = "profile111"
+          FindUnitTestDlls =
+            // Don't run on mono.
+            if isMono then (fun _ -> Seq.empty) else BuildParams.Empty.FindUnitTestDlls }
        { BuildParams.WithSolution with
           // The generated templates
           PlatformName = "Net45"
