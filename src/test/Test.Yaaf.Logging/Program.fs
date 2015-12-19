@@ -5,6 +5,8 @@ namespace Yaaf.LoggingTest
 
 module TestCode = 
     open Yaaf.Logging
+    open Yaaf.Logging.AsyncTracing
+
     let inline testCode () = 
         Log.Verb (fun () -> "starting testcode...")
         let waits = new System.Threading.CountdownEvent(11)
@@ -24,6 +26,7 @@ module Test1Module =
 
 namespace Yaaf.LoggingTest.Test2
 open Yaaf.Logging
+open Yaaf.Logging.AsyncTracing
 
 module Test2Module = 
     let code () = 
@@ -105,6 +108,7 @@ type ``Empty Test``() =
 
 module EntryPoint =
     open Yaaf.Logging
+    open Yaaf.Logging.AsyncTracing
     open System.Diagnostics
       
     //[<EntryPoint>]

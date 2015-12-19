@@ -1,5 +1,6 @@
-﻿### 1.0.2
-
+﻿### 2.0.0
+* AsyncTracing is no longer auto-open
+* Upgrade to F# 4.0
 
 ### 1.0.1
 

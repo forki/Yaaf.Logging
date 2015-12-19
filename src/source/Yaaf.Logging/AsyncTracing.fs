@@ -2,39 +2,42 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 // ----------------------------------------------------------------------------
-[<AutoOpen>]
+
+/// This is not very performant and not really required, manage the instances yourself if possible
+/// Therefore this module is no longer opened by default
 module Yaaf.Logging.AsyncTracing
 
 open System.Diagnostics
 open Yaaf.Logging
-#if NO_PCL
-type CallContext = System.Runtime.Remoting.Messaging.CallContext
-type BindingFlags = System.Reflection.BindingFlags
-#endif
-let inline reraisePreserveStackTrace (e:System.Exception) =
-#if NET45
-    System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(e).Throw()
-#else
-    let remoteStackTraceString = typeof<exn>.GetField("_remoteStackTraceString", BindingFlags.Instance ||| BindingFlags.NonPublic);
-    remoteStackTraceString.SetValue(e, e.StackTrace + System.Environment.NewLine);
-    raise e
-#endif
 
 module internal Helpers =
+#if NO_PCL
+    type CallContext = System.Runtime.Remoting.Messaging.CallContext
+    type BindingFlags = System.Reflection.BindingFlags
+#endif
+    let inline reraisePreserveStackTrace (e:System.Exception) =
+#if NET45
+        System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(e).Throw()
+        raise e
+#else
+        let remoteStackTraceString = typeof<exn>.GetField("_remoteStackTraceString", BindingFlags.Instance ||| BindingFlags.NonPublic);
+        remoteStackTraceString.SetValue(e, e.StackTrace + System.Environment.NewLine);
+        raise e
+#endif
+
     let namespaceTracer = new System.Collections.Concurrent.ConcurrentDictionary<string, ITraceSource>()
     let namespaceWarnings = new System.Collections.Concurrent.ConcurrentDictionary<string, unit>()
-    let mutable globalUnhandledSource = Log.Source "Yaaf.Logging"
     let tryGetTraceSourceFromNs (ns:string) =
         match namespaceTracer.TryGetValue(ns) with
         | true, source -> Some source
         | _ -> 
             if namespaceWarnings.TryAdd(ns, ()) then
-                globalUnhandledSource.TraceEvent(TraceEventType.Warning, 0, "A TraceSource for the namespace {0} could not be found! You can ignore this warning if you are fine with the fallback TraceSource.", ns)
+                Log.globalUnhandledSource.Value.TraceEvent(TraceEventType.Warning, 0, "A TraceSource for the namespace {0} could not be found! You can ignore this warning if you are fine with the fallback TraceSource.", ns)
             None
     let getTraceSourceFromNs (ns:string) =
         match tryGetTraceSourceFromNs (ns) with
         | Some source -> source
-        | _ -> globalUnhandledSource
+        | _ -> Log.globalUnhandledSource.Value
     type AsyncTracerData = 
       { Tracer : ITracer
         /// The namespace of the ITracer, this is only read when ActivityTraceSource is None (which means we reuse the ITracer.TraceSource)
@@ -106,10 +109,10 @@ module internal Helpers =
                 | Some tracer -> tracer, Some ns
                 | None -> 
                     // make sure we dont use the globaltracer the next time (try again next time)
-                    globalUnhandledSource, None
+                    Log.globalUnhandledSource.Value, None
             let tracer = Log.DefaultTracer source "root"
             let data = 
-              { Namespace = ns         
+              { Namespace = ns
                 ActivityId = tracer.ActivityId
                 Tracer = tracer
                 ActivityTraceSource = None }
@@ -142,7 +145,7 @@ module internal Helpers =
         tracer.Dispose()
     
     let rec private isTracked (exn:exn) = 
-        if exn = null then false
+        if isNull exn then false
         elif exn.Data.Contains("tracked") then
             true
         else
@@ -191,15 +194,11 @@ open Helpers
 
 module Log =
     /// <summary>
-    /// Sets the traceSource for all unhandled namespaces.
-    /// </summary>
-    let SetUnhandledSource source = globalUnhandledSource <- source
-
-    /// <summary>
     /// Gets the traceSource for all unhandled namespaces.
     /// </summary>
-    let UnhandledSource = globalUnhandledSource
-    
+    [<System.Obsolete("Use Log.GetUnhandledSource() instead")>]
+    let UnhandledSource = Log.globalUnhandledSource.Value
+
     /// <summary>
     /// Gets the dictionary to configure the namespaces that should be logged.
     /// </summary>
@@ -279,7 +278,7 @@ module Log =
     let Verb fmt = (getTracerFrom (Helper.currentBackend.CreateStackFrame(1, true))).logVerb fmt
     let Warn fmt = (getTracerFrom (Helper.currentBackend.CreateStackFrame(1, true))).logWarn fmt
 
-/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.  
+/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.
 [<System.Diagnostics.DebuggerStepThroughAttribute>]
 [<System.Diagnostics.DebuggerNonUserCodeAttribute>]
 [<System.Diagnostics.DebuggerHiddenAttribute>]
@@ -301,7 +300,7 @@ let raise (exn:exn) =
         Log.Warn(fun () -> L "Re-Raising Exception in Async Code (see previous message for stacktrace): %A" exn)
     Microsoft.FSharp.Core.Operators.raise exn
 
-/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.  
+/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.
 [<System.Diagnostics.DebuggerStepThroughAttribute>]
 [<System.Diagnostics.DebuggerNonUserCodeAttribute>]
 [<System.Diagnostics.DebuggerHiddenAttribute>]
@@ -309,7 +308,7 @@ let failwith msg =
     let exn = new exn(msg)
     raise exn
      
-/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.  
+/// Helps by logging the exception before throwing it, can lead helpful traces in the log when using async code.
 [<System.Diagnostics.DebuggerStepThroughAttribute>]
 [<System.Diagnostics.DebuggerNonUserCodeAttribute>]
 [<System.Diagnostics.DebuggerHiddenAttribute>]

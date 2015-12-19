@@ -28,7 +28,7 @@ module CopyListenerHelper =
         toListener
     let cleanName (name:string) = 
         let invalid = Path.GetInvalidFileNameChars() 
-                        |> Seq.append (Path.GetInvalidPathChars())   
+                        |> Seq.append (Path.GetInvalidPathChars())
         let cleanName = 
             (
             name 
@@ -49,7 +49,7 @@ module CopyListenerHelper =
             Path.Combine(
                 Path.GetDirectoryName(oldRelFilePath),
                 sprintf "%s.%s%s" fileName name extension)
-    let duplicateListener (source:string) (eventCache:TraceEventCache) (cleanName:string) (l:TraceListener) =  
+    let duplicateListener (source:string) (eventCache:TraceEventCache) (cleanName:string) (l:TraceListener) =
         match l:>obj with
         | :? IDuplicateListener as myListener ->
             myListener.Duplicate(cleanName)
@@ -110,7 +110,7 @@ type EventLogTraceListener(initData:string, name:string) =
     
 /// To be able to use the given configuration but write in different files.
 /// We want to write in different files per default because this class is designed for parallel environments.
-/// For example when in the configuration "file.log" is given we log to "file.name.log".    
+/// For example when in the configuration "file.log" is given we log to "file.name.log".
 type internal MyTraceSource(traceEntry:string,name:string) as x= 
     inherit TraceSource(traceEntry)
     do 
@@ -295,9 +295,9 @@ module internal Helper =
 #endif
 
     let isMono =
-        System.Type.GetType ("Mono.Runtime") <> null
+        System.Type.GetType ("Mono.Runtime") |> isNull |> not
         
-    let doOnActivity activity f =        
+    let doOnActivity activity f =
         let oldId = currentBackend.CurrentActivityId
         try
             currentBackend.CurrentActivityId <- activity
@@ -320,7 +320,7 @@ module LogInterfaceExtensions =
     type ITracer with 
         member x.doInId f = 
             doOnActivity x.ActivityId f
-        member private x.logHelper ty (o : string) =  
+        member private x.logHelper ty (o : string) =
             x.doInId 
                 (fun () ->
                     x.TraceSource.TraceEvent(ty, 0, "{0}", o)
@@ -358,7 +358,7 @@ module LogInterfaceExtensions =
     let internal createDefaultStateTracer (traceSource:ITraceSource) activityName = 
         let activityId = Guid.NewGuid()
         doOnActivity activityId (fun () -> traceSource.TraceEvent(TraceEventType.Start, 0, activityName))
-        { new ITracer with  
+        { new ITracer with
             member x.TraceSource = traceSource
             member x.ActivityId = activityId
         
@@ -374,14 +374,14 @@ module LogInterfaceExtensions =
             x.doInId 
                 (fun () -> 
                     x.TraceSource.TraceTransfer(0, "Switching to " + newActivity, tracer.ActivityId))
-            tracer   
+            tracer
  
 /// Provides a simple layer above the .net logging facilities
-module Log = 
+module Log =
     let SetBackend log = Helper.currentBackend <- log
         
-    let ForActivity source activityId =     
-        { new ITracer with  
+    let ForActivity source activityId =
+        { new ITracer with
             member x.TraceSource = source
             member x.ActivityId = activityId
         
@@ -419,7 +419,18 @@ module Log =
         source.Listeners.Add logger |> ignore
 #endif
 
-            
+    let mutable internal globalUnhandledSource = lazy Source "Yaaf.Logging"
+
+    /// <summary>
+    /// Sets the traceSource for all unhandled namespaces.
+    /// </summary>
+    let SetUnhandledSource source = globalUnhandledSource <- lazy source
+
+    /// <summary>
+    /// Gets the traceSource for all unhandled namespaces.
+    /// </summary>
+    let GetUnhandledSource () = globalUnhandledSource.Value
+
             
             
             
