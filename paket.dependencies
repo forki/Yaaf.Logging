@@ -3,9 +3,9 @@ source https://nuget.org/api/v2
 // Build
 nuget Yaaf.AdvancedBuilding
 nuget NuGet.CommandLine
-nuget NUnit.Runners
+nuget NUnit.Runners ~> 2
 
 // Projects
-nuget NUnit
+nuget NUnit ~> 2
 nuget Unquote
-nuget FSharp.Core
+nuget FSharp.Core ~> 4.0.0

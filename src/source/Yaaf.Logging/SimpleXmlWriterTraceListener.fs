@@ -13,7 +13,7 @@ open System.Xml.XPath
 open System.Threading
 
 module XmlWriterHelper =
-    let backupSource = lazy Log.UnhandledSource
+    let backupSource = lazy Log.GetUnhandledSource()
     let backupTracer = lazy Log.DefaultTracer backupSource.Value "backup"
     type Context = {
         Writer : XmlWriter
@@ -22,7 +22,7 @@ module XmlWriterHelper =
     let combine f1 f2 = (fun context ->
         f1 context
         f2 context)
-    let Empty = (fun context -> ())
+    let Empty = ignore
     let Elem name f = (fun context ->
         let w = context.Writer
         w.WriteStartElement(name, context.Namespace)
@@ -36,7 +36,7 @@ module XmlWriterHelper =
         
     let rec And (l:Writer list) = 
         match l with
-        | [] -> (fun context -> ())
+        | [] -> ignore
         | x::xs -> combine x (And xs)
         
     let Attribute name value = (fun context ->
@@ -168,7 +168,7 @@ type SimpleXmlWriterTraceListener(initData:string, w: XmlWriter, name:string) as
         // write it
         try
             lock (getLockObj()) (fun () ->
-                xmlWriter { Namespace = nsE2E; Writer = w }   
+                xmlWriter { Namespace = nsE2E; Writer = w }
                 w.Flush()
                 x.Flush())
         with
