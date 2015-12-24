@@ -379,7 +379,7 @@ module LogInterfaceExtensions =
 /// Provides a simple layer above the .net logging facilities
 module Log =
     let SetBackend log = Helper.currentBackend <- log
-    let GetBAckend () = Helper.currentBackend
+    let GetBackend () = Helper.currentBackend
         
     let ForActivity source activityId =
         { new ITracer with

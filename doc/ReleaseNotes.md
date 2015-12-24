@@ -1,4 +1,7 @@
-﻿### 2.0.1
+﻿### 2.0.2
+* Fix typo.
+
+### 2.0.1
 * Allow users to access the backend via Log.GetBackend()
 
 ### 2.0.0
